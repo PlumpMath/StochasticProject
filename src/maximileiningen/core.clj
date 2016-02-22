@@ -4,17 +4,16 @@
             [clojure.core.logic :as l]
             [clojure.core.logic.arithmetic :as ar]
             [clojure.core.logic.fd :as fd]
-            [clojure.core.matrix.operators :as mo]))
+            [clojure.core.matrix.operators :as mo])
+  (:gen-class))
 
 (def max-delta "Depends on the viewpoint: either temperature, speed or
   max distance a thing can move between two frames."
-  1)
+  80)
 
 (def new-delta #(- (rand (inc (* 2 max-delta))) max-delta))
 
 (defn setup []
-  ;; anti-aliasing
-  (q/smooth 10)
   ;; Set frame rate (frames per second).
   (q/frame-rate 100)
   ;; Set color mode to HSB (HSV) instead of default RGB.
@@ -49,14 +48,16 @@
       ;; Draw the circle.
       (q/sphere 80))))
 
-(q/defsketch maximileiningen2
-  :title "You spin my circle right round"
-  :size [500 500]
-  ;; setup function called only once, during sketch initialization.
-  :setup setup
-  ;; update-state is called on each iteration before draw-state.
-  :update update-state
-  :draw draw-state
-  :renderer :opengl
-  :features [:keep-on-top]
-  :middleware [m/fun-mode m/navigation-3d])
+(defn -main [& args]
+  (q/defsketch maximileiningen2
+    :title "You spin my circle right round"
+    :size [500 500]
+    :settings #(q/smooth 3)
+    ;; setup function called only once, during sketch initialization.
+    :setup setup
+    ;; update-state is called on each iteration before draw-state.
+    :update update-state
+    :draw draw-state
+    :renderer :opengl
+    :features [:keep-on-top]
+    :middleware [m/fun-mode m/navigation-3d]))

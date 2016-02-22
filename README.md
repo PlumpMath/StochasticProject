@@ -7,9 +7,13 @@ This sketch is still a draft.
 
 ## Usage
 
-LightTable - open `core.clj` and press `Ctrl+Shift+Enter` to evaluate the file.
+Command line - just invoke `lein run`.
 
-Emacs - run cider, open `core.clj` and press `C-c C-k` to evaluate the file.
+LightTable - open `core.clj` and press `Ctrl+Shift+Enter` to evaluate
+the file.
+
+Emacs - run cider, open `core.clj` and press `C-c C-k` to evaluate the
+file.
 
 REPL - run `(require 'maximileiningen2.core)`.
 
